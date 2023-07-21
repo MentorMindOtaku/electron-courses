@@ -17,10 +17,10 @@ const createWindow = () => {
   });
 
   // and load the index.html of the app.
-  // mainWindow.loadFile(path.join(__dirname, "index.html"));
-  mainWindow.loadURL(
-    "https://httpbin.org/basic-auth/user/passwd"
-  );
+   mainWindow.loadFile(path.join(__dirname, "index.html"));
+  // mainWindow.loadURL(
+  //   "https://httpbin.org/basic-auth/user/passwd"
+  // );
   const wc = mainWindow.webContents;
 
   wc.on("did-finish-load", () =>
@@ -61,7 +61,7 @@ const createWindow = () => {
     );
   });
   // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+ // mainWindow.webContents.openDevTools();
 };
 
 // This method will be called when Electron has finished
