@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World!</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <button onclick="showSite()">
+      Launch Electron.js Site</button
+    ><br />
+    <button onclick="openSplash()">Open Splash.png</button
+    ><br />
+    <button onclick="showSplashFile()">
+      Show Splash.png</button
+    ><br />
+    <button onclick="deleteSplashFile()">
+      Delete Splash.png</button
+    ><br />
+
+    <script>
+      const { shell } = require("electron");
+
+      const showSite = window.app.showSite;
+      const openSplash = window.app.openSplash;
+      const showSplashFile = window.app.showSplashFile;
+      const deleteSplashFile = window.app.deleteSplashFile;
+    </script>
+  </body>
+</html>
