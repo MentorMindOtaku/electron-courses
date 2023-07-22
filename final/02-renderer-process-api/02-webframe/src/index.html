@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World!</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <img src="https://placekitten.com/450/300" alt="" />
+    <br />
+    <button onclick="zoomUp()">Increase Zoom</button>
+    <button onclick="zoomDown()">Decrease Zoom</button>
+    <button onclick="zoomReset()">Reset Zoom</button>
+
+    <script>
+      const zoomUp = window.app.zoomUp;
+      const zoomDown = window.app.zoomDown;
+      const zoomReset = window.app.zoomReset;
+    </script>
+  </body>
+</html>
