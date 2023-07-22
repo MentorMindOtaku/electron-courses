@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World!</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <img width="100%" src="" id="screenshot" /><br />
+    <button id="screenshot-button">Get Screenshot</button>
+
+    <script>
+      document
+        .getElementById("screenshot-button")
+        .addEventListener("click", () => {
+          app.makeCapture();
+          app.receivePathCapture();
+        });
+    </script>
+  </body>
+</html>
