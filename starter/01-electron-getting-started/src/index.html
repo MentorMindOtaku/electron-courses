@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World!</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <a href="#" onclick="newWin()">New Window</a>
+    <a href="#" onclick="closeWin()">Close Window</a>
+    <a href="#" onclick="styleWin()">Bad Fonts</a>
+
+    <script>
+      let win;
+
+      const newWin = () => {
+        win = window.open(
+          "https://developer.mozilla.org",
+          "_blank",
+          "width=500,height=450,alwaysOnTop=1"
+        );
+      };
+
+      const closeWin = () => {
+        win.close();
+      };
+
+      const styleWin = () => {
+        win.eval(
+          "document.getElementsByTagName('h1')[0].style.fontFamily = 'Comic Sans MS'"
+        );
+      };
+    </script>
+  </body>
+</html>
