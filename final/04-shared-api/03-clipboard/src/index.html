@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World!</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <br /><button onclick="makeUpper()">
+      Make clipboard uppercase
+    </button>
+    <br /><button onclick="showImage()">
+      Show clipboard image
+    </button>
+
+    <br /><img src="" id="cbImage" />
+
+    <script>
+      const showImage = window.app.showImage;
+      const makeUpper = window.app.makeUpper;
+    </script>
+  </body>
+</html>
