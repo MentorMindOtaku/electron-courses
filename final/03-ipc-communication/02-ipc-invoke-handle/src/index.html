@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World!</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <h1>💖 Hello World!</h1>
+    <p>Welcome to your Electron application.</p>
+
+    <button id="ask">Pick a fruit.</button>
+
+    <script>
+      document
+        .getElementById("ask")
+        .addEventListener("click", (e) => {
+          window.app.askFruit();
+        });
+    </script>
+  </body>
+</html>
