@@ -1,8 +1,8 @@
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
+const fs = require("fs");
 
-let mainWindow, secondWindow;
-
+let mainWindow;
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require("electron-squirrel-startup")) {
   app.quit();
@@ -13,16 +13,6 @@ const createWindow = () => {
   mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
-    frame: false,
-    webPreferences: {
-      preload: path.join(__dirname, "preload.js"),
-    },
-  });
-
-  secondWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
-    frame: false,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
     },
@@ -30,32 +20,29 @@ const createWindow = () => {
 
   // and load the index.html of the app.
   mainWindow.loadFile(path.join(__dirname, "index.html"));
-  secondWindow.loadFile(path.join(__dirname, "index.html"));
 
-  mainWindow.on("focus", () =>
-    console.log("Main win focused")
-  );
-  secondWindow.on("focus", () =>
-    console.log("Second win focused")
-  );
-
-  app.on("browser-window-focus", () =>
-    console.log("App focused")
-  );
-
-  console.log(BrowserWindow.getAllWindows());
-
+  // Reassign null value to mainWindow when window closed
   mainWindow.on("closed", () => (mainWindow = null));
-  secondWindow.on("closed", () => (secondWindow = null));
 
   // Open the DevTools.
-  // mainWindow.webContents.openDevTools();
+  mainWindow.webContents.openDevTools();
 };
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on("ready", createWindow);
+
+ipcMain.handle("app:path", () => {
+  return app.getPath("desktop");
+});
+
+ipcMain.on(
+  "app:writeFile",
+  (event, { desktopPath, ext }) => {
+    fs.writeFile(`${desktopPath}/splash.${ext}`, data);
+  }
+);
 
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits

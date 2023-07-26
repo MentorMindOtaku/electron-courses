@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World!</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <h1>Convert splash.png:</h1>
+
+    <button onclick="toPng()">PNG</button>
+    <button onclick="toJpg()">JPG</button>
+    <button onclick="toTag()">Show</button>
+    <br />
+    <img src="" id="preview" />
+
+    <script>
+      const toTag = window.app.toTag;
+
+      const toPng = window.app.toPng;
+
+      const toJpg = window.app.toJpg;
+    </script>
+  </body>
+</html>

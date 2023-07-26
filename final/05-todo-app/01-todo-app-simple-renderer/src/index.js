@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
 
 let mainWindow, secondWindow;
@@ -13,38 +13,29 @@ const createWindow = () => {
   mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
-    frame: false,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
     },
   });
 
   secondWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
-    frame: false,
+    width: 600,
+    height: 500,
+    modal: true,
+    show: false,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
     },
   });
-
   // and load the index.html of the app.
-  mainWindow.loadFile(path.join(__dirname, "index.html"));
-  secondWindow.loadFile(path.join(__dirname, "index.html"));
-
-  mainWindow.on("focus", () =>
-    console.log("Main win focused")
+  mainWindow.loadFile(
+    path.join(__dirname, "/renderer/index.html")
   );
-  secondWindow.on("focus", () =>
-    console.log("Second win focused")
+  secondWindow.loadFile(
+    path.join(__dirname, "/renderer/createTask.html")
   );
 
-  app.on("browser-window-focus", () =>
-    console.log("App focused")
-  );
-
-  console.log(BrowserWindow.getAllWindows());
-
+  // Reassign null value to mainWindow when window closed
   mainWindow.on("closed", () => (mainWindow = null));
   secondWindow.on("closed", () => (secondWindow = null));
 
@@ -56,6 +47,17 @@ const createWindow = () => {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on("ready", createWindow);
+
+ipcMain.on("task:open", () => {
+  secondWindow.show();
+});
+
+ipcMain.on("task:create", (event, task) => {
+  mainWindow.webContents.send("task:added", task);
+  secondWindow.hide();
+});
+
+
 
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits
